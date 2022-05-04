@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net.Http;
 using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,15 +20,35 @@ namespace ProjetTableauBordESC
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private async void Form1_Load(object sender, EventArgs e)
         {
             List<CarteRéseau> cartes = new List<CarteRéseau>();
-            
+
+            HttpClient httpClient = new HttpClient();
+            httpClient.BaseAddress = new Uri("http://api.macvendors.com/");
+
             foreach (var nic in NetworkInterface.GetAllNetworkInterfaces())
             {
-                cartes.Add(new CarteRéseau(nic));
+                CarteRéseau carteReseau;
+
+                cartes.Add(carteReseau = new CarteRéseau(nic));
+
+                //if (String.IsNullOrEmpty(carteReseau.MAC))
+                  //  continue;
+
+                if (carteReseau.MAC == "404")
+                    carteReseau.Fabricant = "Fabricant non trouvé";
+
+                HttpResponseMessage réponse = await httpClient.GetAsync(carteReseau.MAC);
+                
+                carteReseau.Fabricant = await réponse.Content.ReadAsStringAsync();
+                await Task.Delay(1000);
+
+                dgvInterfaces.Rows.Add(carteReseau.NomCarte, carteReseau.IPv4, carteReseau.Fabricant);
+
             }
 
+            dgvInterfaces.AutoGenerateColumns = false;
             dgvInterfaces.DataSource = cartes;
         }
 
@@ -45,7 +66,7 @@ namespace ProjetTableauBordESC
             }
 
             // On peut hardcoder le 0 avec confiance grace a la verification
-            pgInterfaceSelectionne.SelectedObject = dgvInterfaces.SelectedRows[0];
+            pgInterfaceSelectionne.SelectedObject = dgvInterfaces.SelectedRows[0].DataBoundItem;
         }
     }
 }

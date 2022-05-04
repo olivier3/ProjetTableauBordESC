@@ -32,6 +32,9 @@
             this.tabPageInterface = new System.Windows.Forms.TabPage();
             this.scInterfaces = new System.Windows.Forms.SplitContainer();
             this.dgvInterfaces = new System.Windows.Forms.DataGridView();
+            this.colNomInterface = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colIPv4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFabricant = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pgInterfaceSelectionne = new System.Windows.Forms.PropertyGrid();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabControl1.SuspendLayout();
@@ -84,16 +87,53 @@
             // 
             // dgvInterfaces
             // 
+            this.dgvInterfaces.AllowUserToAddRows = false;
+            this.dgvInterfaces.AllowUserToDeleteRows = false;
+            this.dgvInterfaces.AllowUserToResizeRows = false;
             this.dgvInterfaces.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvInterfaces.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colNomInterface,
+            this.colIPv4,
+            this.colFabricant});
             this.dgvInterfaces.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvInterfaces.Location = new System.Drawing.Point(0, 0);
             this.dgvInterfaces.Name = "dgvInterfaces";
+            this.dgvInterfaces.ReadOnly = true;
+            this.dgvInterfaces.RowHeadersVisible = false;
             this.dgvInterfaces.RowHeadersWidth = 51;
             this.dgvInterfaces.RowTemplate.Height = 24;
+            this.dgvInterfaces.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvInterfaces.Size = new System.Drawing.Size(397, 415);
             this.dgvInterfaces.TabIndex = 0;
             this.dgvInterfaces.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgvInterfaces_DataError);
             this.dgvInterfaces.SelectionChanged += new System.EventHandler(this.dgvInterfaces_SelectionChanged);
+            // 
+            // colNomInterface
+            // 
+            this.colNomInterface.DataPropertyName = "NomCarte";
+            this.colNomInterface.HeaderText = "Interface";
+            this.colNomInterface.MinimumWidth = 6;
+            this.colNomInterface.Name = "colNomInterface";
+            this.colNomInterface.ReadOnly = true;
+            this.colNomInterface.Width = 125;
+            // 
+            // colIPv4
+            // 
+            this.colIPv4.DataPropertyName = "IPv4";
+            this.colIPv4.HeaderText = "IPv4";
+            this.colIPv4.MinimumWidth = 6;
+            this.colIPv4.Name = "colIPv4";
+            this.colIPv4.ReadOnly = true;
+            this.colIPv4.Width = 125;
+            // 
+            // colFabricant
+            // 
+            this.colFabricant.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colFabricant.DataPropertyName = "Fabricant";
+            this.colFabricant.HeaderText = "Fabricant";
+            this.colFabricant.MinimumWidth = 6;
+            this.colFabricant.Name = "colFabricant";
+            this.colFabricant.ReadOnly = true;
             // 
             // pgInterfaceSelectionne
             // 
@@ -141,6 +181,9 @@
         private System.Windows.Forms.SplitContainer scInterfaces;
         private System.Windows.Forms.DataGridView dgvInterfaces;
         private System.Windows.Forms.PropertyGrid pgInterfaceSelectionne;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colNomInterface;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colIPv4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFabricant;
     }
 }
 

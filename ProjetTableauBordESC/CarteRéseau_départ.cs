@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Net.Http;
 using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +15,9 @@ namespace CarteReseau
     public class CarteRéseau
     {
         private NetworkInterface networkInterface;
+
+        public string Fabricant { get; set; }
+
         public CarteRéseau(NetworkInterface networkInterface)
         {
             this.networkInterface = networkInterface;
@@ -44,6 +48,7 @@ namespace CarteReseau
         /// <summary>
         /// Technique 2, propriété automatique à setter dans le ctor
         /// </summary>
+
         public string MAC { get; set; }
 
 
@@ -71,8 +76,6 @@ namespace CarteReseau
                     return networkInterface.NetworkInterfaceType.ToString();
             }
         }
-
-
     }
 }
 #endif
